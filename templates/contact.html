@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/a75a4a90c1.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='Images/idm_logo.png') }}" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        *,
+        ::before,
+        ::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            box-sizing: border-box;
+            justify-content: center;
+            margin: 3rem 0 0 0;
+            font-family: 'Poppins', sans-serif;
+            font-size: .938rem;
+            background: rgb(31 41 55 / 1);
+            color: white;
+            line-height: 1.6;
+        }
+
+        body {
+            position: relative;
+            box-sizing: border-box;
+            justify-content: center;
+            background-color: rgb(31 41 55);
+            margin: 0;
+            overflow-y: auto;
+        }
+
+        h1 {
+            margin: 0 auto;
+            top: 200px;
+            text-align: center;
+            font-family: sans-serif;
+            font-size: 90px;
+            position: relative;
+            color: white;
+        }
+
+        body::before,
+        body::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.5;
+            animation: move 10s infinite;
+        }
+
+
+        body::before {
+            width: 400px;
+            height: 400px;
+            background-color: rgb(138, 28, 138);
+            top: 10px;
+            left: 100px;
+            animation: one 10s infinite;
+        }
+
+        body::after {
+            width: 400px;
+            height: 400px;
+            background-color: rgb(51, 111, 195);
+            top: 10px;
+            right: 100px;
+            animation: two 10s infinite;
+        }
+
+        @media (max-width:370px) {
+            body::before {
+                top: 0;
+                left: 0;
+            }
+
+            body::after {
+                top: 0;
+                right: 0;
+            }
+        }
+
+        @keyframes one {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            25% {
+                transform: translate(-100px, 70px);
+            }
+
+            50% {
+                transform: translate(20px, 150px);
+            }
+
+            75% {
+                transform: translate(50px, 100px);
+            }
+
+            100% {
+                transform: translate(0, 0);
+            }
+        }
+
+        @keyframes two {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            25% {
+                transform: translate(50px, 10px);
+            }
+
+            50% {
+                transform: translate(100px, 50px);
+            }
+
+            75% {
+                transform: translate(50px, 100px);
+            }
+
+            100% {
+                transform: translate(0, 0);
+            }
+        }
+
+        @media only screen and (max-width: 370px) {
+            h1 {
+                font-size: 45px;
+            }
+
+            body::before,
+            body::after {
+                width: 130px;
+                height: 130px;
+                filter: blur(50px);
+            }
+        }
+
+
+
+        h1,
+        h2,
+        h3,
+        ul,
+        p {
+            margin: 0;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-weight: 600;
+            color: white;
+        }
+
+        ul {
+            padding: 0;
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .section {
+            padding: 4rem 0 2rem;
+        }
+
+        .section-title,
+        .section-title-center {
+            font-size: 1.25rem;
+            color: #161216;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .l-main {
+            overflow: hidden;
+        }
+
+        .bd-container {
+            max-width: 968px;
+            width: calc(100% - 3rem);
+            margin-left: 1.5rem;
+            margin-right: 1.5rem;
+        }
+
+        .bd-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .l-header {
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            background: transparent;
+        }
+
+        .nav {
+            height: 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        @media screen and (max-width: 768px) {
+            .nav__menu {
+                position: fixed;
+                top: -100%;
+                left: 0;
+                right: 0;
+                width: 90%;
+                margin: 0 auto;
+                padding: 2.5rem 0 0;
+                text-align: center;
+                background-color: #FEFBFB;
+                transition: .4s;
+                box-shadow: 0 0 4px rgba(0, 0, 0, .1);
+                border-radius: 2rem;
+                z-index: 100;
+            }
+        }
+
+        .nav__item {
+            margin-bottom: 1.5rem;
+        }
+
+        .nav__link,
+        .nav__logo,
+        .nav__toggle {
+            color: white;
+            font-weight: 600;
+        }
+
+        .nav__logo:hover {
+            color: #DA2534;
+        }
+
+        .nav__link {
+            transition: .3s;
+        }
+
+        .nav__link:hover {
+            color: #DA2534;
+        }
+
+        .nav__toggle {
+            font-size: 1.3rem;
+            cursor: pointer;
+        }
+
+
+
+
+        .show-menu {
+            top: 4rem;
+        }
+
+        .active-link {
+            position: relative;
+        }
+
+        .active-link::before {
+            content: '';
+            position: absolute;
+            bottom: -.75rem;
+            left: 45%;
+            width: 5px;
+            height: 5px;
+            background-color: white;
+            border-radius: 50%;
+        }
+
+        .home__container {
+            row-gap: .5rem;
+        }
+
+        .footer__container {
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        }
+
+        .footer__logo {
+            color: #161216;
+        }
+
+        .footer__title {
+            margin-bottom: 1rem;
+        }
+
+        .footer__logo,
+        .footer__title {
+            font-size: 1.125rem;
+        }
+
+        .footer__link {
+            display: inline-block;
+            margin-bottom: .75rem;
+            color: rgb(211, 194, 194);
+        }
+
+        .footer__link:hover {
+            color: #DA2534;
+        }
+
+        .footer__social {
+            font-size: 1.5rem;
+            color: white;
+            margin-right: 1.5rem;
+        }
+
+        .footer__social:hover {
+            color: #DA2534;
+        }
+
+        .footer__copy {
+            text-align: center;
+            font-size: .813rem;
+            color: white;
+            margin-top: 4rem;
+        }
+
+
+
+        @media screen and (max-width: 775px) {
+
+            .nav__link,
+            .nav__logo,
+            .nav__toggle {
+                color: black;
+            }
+
+            .active-link::before {
+                background-color: black;
+            }
+        }
+
+        @media screen and (min-width: 576px) {
+
+            .home__container {
+                grid-template-columns: repeat(2, 1fr);
+                align-items: center;
+            }
+
+            .home__container {
+                padding: 5rem 0 0;
+            }
+        }
+
+        @media screen and (min-width: 768px) {
+            body {
+                margin: 0;
+            }
+
+            .section {
+                padding-top: 7rem;
+            }
+
+            .nav {
+                height: 4.5rem;
+            }
+
+            .nav__list {
+                display: flex;
+                align-items: center;
+            }
+
+            .nav__item {
+                margin-left: 2.5rem;
+                margin-bottom: 0;
+            }
+
+            .nav__toggle {
+                display: none;
+            }
+
+            .home__container {
+                padding: 7rem 2rem 0;
+            }
+
+        }
+
+        @media screen and (min-width: 968px) {
+            .bd-container {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .home__container {
+                column-gap: 5rem;
+            }
+
+
+            .footer__logo,
+            .footer__title {
+                font-size: 1.25rem;
+            }
+
+            body {
+                font-size: 1rem;
+            }
+
+            .footer__copy {
+                font-size: 0.875rem;
+            }
+        }
+
+        .toggle-rotate {
+            transition: transform 0.5s;
+        }
+
+        .rotate {
+            transform: rotate(180deg);
+        }
+
+
+
+        @keyframes border-bottom-right-top-left-animation {
+            0% {
+                border-bottom-color: #e81cff;
+                border-right-color: #e81cff;
+                border-top-color: #e81cff;
+                border-left-color: #e81cff;
+            }
+
+            50% {
+                border-bottom-color: #40c9ff;
+                border-right-color: #40c9ff;
+                border-top-color: #40c9ff;
+                border-left-color: #40c9ff;
+            }
+
+            100% {
+                border-bottom-color: #e81cff;
+                border-right-color: #e81cff;
+                border-top-color: #e81cff;
+                border-left-color: #e81cff;
+            }
+        }
+
+
+
+        footer {
+            position: relative;
+            z-index: 10;
+        }
+
+
+        .form-container {
+            margin-top: 30px;
+            width: 800px;
+            border-bottom: 2px solid #e81cff;
+            border-right: 2px solid #e81cff;
+            border-left: 2px solid #e81cff;
+            border-top: 2px solid #e81cff;
+            padding: 32px 24px;
+            font-size: 14px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            box-sizing: border-box;
+            border-radius: 16px;
+            animation: border-bottom-right-top-left-animation 3s infinite;
+            position: relative;
+            z-index: 10;
+        }
+
+
+
+        .form-container button:active {
+            scale: 0.95;
+        }
+
+        .form-container .form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-container .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .form-container .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #717171;
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        .form-container .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 8px;
+            color: #fff;
+            font-family: inherit;
+            background-color: transparent;
+            border: 1px solid #414141;
+        }
+
+        .form-container .form-group input:focus {
+            outline: none;
+            border-color: #e81cff;
+        }
+
+        .form-container .form-submit-btn {
+            display: flex;
+            justify-content: center;
+            font-family: inherit;
+            color: #717171;
+            font-weight: 600;
+            width: 40%;
+            background: #313131;
+            border: 1px solid #414141;
+            padding: 12px 16px;
+            cursor: pointer;
+            border-radius: 6px;
+        }
+
+        .form-container .form-submit-btn:hover {
+            background-color: #fff;
+            border-color: #fff;
+            color: #313131;
+        }
+
+        @media (max-width: 768px) {
+            .form-container {
+                width: 450px;
+                padding: 24px 16px;
+            }
+
+            .form-container .form-group input,
+            .form-container .form-submit-btn {
+                padding: 10px 14px;
+            }
+
+            .form-container .form-group label {
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .form-container {
+                width: 350px;
+                padding: 20px 12px;
+            }
+
+            .form-container .form-group input {
+                padding: 8px 12px;
+            }
+
+            .form-container .form-submit-btn {
+                padding: 10px;
+                max-width: 100px;
+                font-size: 12px;
+            }
+
+            .form-container .form-group label {
+                font-size: 10px;
+            }
+        }
+
+
+        @media (max-width: 400px) {
+            .form-container {
+                width: 330px;
+            }
+        }
+
+        @media (max-width: 370px) {
+            .form-container {
+                width: 300px;
+            }
+        }
+
+        .form-container .form-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: nowrap;
+            align-items: center;
+        }
+
+        .form-container .form-group i {
+            font-size: 2rem;
+            color: #fff;
+        }
+
+        .iconnnn {
+            display: none;
+        }
+
+        @media (max-width: 770px) {
+            .iconnnn {
+                display: block;
+            }
+        }
+
+        .main_icon {
+            display: flex;
+            gap: 1rem;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            align-items: center;
+        }
+
+        .main_icon i {
+            color: #fff;
+        }
+
+        .iconnnn {
+            margin-top: 30px;
+        }
+
+        textarea::placeholder, 
+input::placeholder {
+  color: #b7b7b7;
+}
+    </style>
+    <title>Send Feedback or Message</title>
+</head>
+
+<body>
+
+
+    <header class="l-header" id="header">
+        <nav class="nav bd-container">
+            <a href="#" class="nav__logo" style="color: white;">IMD</a>
+
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="/" class="nav__link">Reel</a></li>
+                    <li class="nav__item"><a href="/download_image" class="nav__link">Image</a></li>
+                    <li class="nav__item"><a href="/download_profile_pic" class="nav__link">Profile Pic</a></li>
+                    <li class="nav__item"><a href="/contact" class="nav__link active-link">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="nav__toggle" id="nav-toggle" style="color: white;">
+                <i class="fa-solid fa-angles-down"></i>
+            </div>
+        </nav>
+    </header>
+
+
+
+    <main class="l-main">
+        <section class="home iconnnn" id="home">
+            <div class="home__container bd-container bd-grid">
+                <div class="form-container">
+                    <form id="image_download_form" action="/download_image" method="POST">
+                        <div class="form-group">
+                            <ul class="main_icon">
+                                <li><a href="/"><i class="fa-solid fa-video"></i></a></li> ||
+                                <li><a href="/download_image"><i class="fa-solid fa-image"></i></a></li> ||
+                                <li><a href="/download_profile_pic"><i class="fa-solid fa-user"></i></a></li> ||
+                                <li><a href="/contact"><i class="fa-solid fa-address-book"></i></a></li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section class="home">
+            <div class="home__container bd-container bd-grid">
+                <div class="form-container">
+                    <form id="image_download_form" name="submit-to-google-sheet">
+                        <div class="form-group">
+                            <label for="Name" style="color: #b7b7b7;">Name:</label>
+                            <input type="text" id="Name" name="Name" required placeholder="Enter Your Name">
+                            <label for="Email" style="color: #b7b7b7;">Email:</label>
+                            <input type="email" id="Email" name="Email" required placeholder="Enter Your Email">
+                            <label for="Message" style="color: #b7b7b7;">Feedback/Message:</label>
+                            <input type="textarea" id="Message" name="Message" required placeholder="Feedback/Message"
+                                style="resize: none; height: 100px;">
+                        </div>
+                        <br>
+                        <button class="form-submit-btn" type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer section">
+        <div class="footer__container bd-container bd-grid">
+            <div class="footer__content">
+                <h3 class="footer__title">Quick Links</h3>
+                <ul>
+                    <li><a href="/" class="footer__link">Reel </a></li>
+                    <li><a href="/download_image" class="footer__link">Image</a></li>
+                    <li><a href="/download_profile_pic" class="footer__link">Profile Pic </a></li>
+                    <li><a href="/contact" class="footer__link">Contact </a></li>
+                </ul>
+            </div>
+
+
+            <div class="footer__content">
+                <h3 class="footer__title">Reach Out to Me!</h3>
+                <ul>
+                    <li>
+                        <a href="mailto:tatapudisairam5@gmail.com" class="footer__link">
+                            <i class="fa-solid fa-envelope"></i> Email: tatapudisairam5@gmail.com
+                        </a>
+                    </li>
+                    <li>
+                        <a href="tel:+917609826595" class="footer__link">
+                            <i class="fa-solid fa-phone"></i> Phone: +91 7609826595
+                        </a>
+                    </li>
+
+                    <br>
+                    <li>
+                        <a href="https://www.facebook.com/tatapudi.sairam.16?mibextid=ZbWKwL" class="footer__social" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/tatapudi_sairam/" class="footer__social" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/sairam-tatapudi-887b4924b/" class="footer__social" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <p class="footer__copy" style="font-weight: bold; color: #fff;">&#169; 2023-2024. All right reserved</p>
+    </footer>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <script>
+        const showMenu = (toggleId, navId) => {
+            const toggle = document.getElementById(toggleId),
+                nav = document.getElementById(navId)
+
+            if (toggle && nav) {
+                toggle.addEventListener('click', () => {
+                    nav.classList.toggle('show-menu')
+                    toggle.classList.toggle('rotate')
+                })
+            }
+        }
+        showMenu('nav-toggle', 'nav-menu')
+
+        const navLink = document.querySelectorAll('.nav__link')
+
+        function linkAction() {
+            const navMenu = document.getElementById('nav-menu')
+            navMenu.classList.remove('show-menu')
+            document.getElementById('nav-toggle').classList.remove('rotate')
+        }
+        navLink.forEach(n => n.addEventListener('click', linkAction))
+
+
+
+        const s = ScrollReveal({
+            distance: '30px',
+            duration: 1800,
+            reset: true,
+        });
+
+        s.reveal(`
+           .footer__content`, {
+            origin: 'top',
+            interval: 200,
+        })
+
+
+    </script>
+
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbw5McT8QVkIvCE6m03uaN23Qx8neR-Ws3reISH1Y5-GmQEOrDUU2SZ4moyIrq0WkFwaeg/exec'
+        const form = document.forms['submit-to-google-sheet']
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                .then(response => {
+                    if (response.status == 200) {
+                        swal("Good job!", "You have Successfully submitted!", "success");
+                    } else {
+                        swal("Error!", "Error in submitting!", "error");
+                    }
+                    form.reset();
+                })
+                .catch(error => console.error('Error!', error.message));
+        });
+    </script>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            Swal.fire({
+                title: "<strong>I'd Love to Hear from You!</strong>",
+                html: `
+                <p style="font-size: 1.1em; color: #333;">
+                    Feel free to fill out the contact form to share any feedback, feature updates, or ideas for enhancements. I'll do my best to incorporate them.
+                </p>
+            `,
+                background: '#ffffff',
+                color: '#333333',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Got it!',
+                showClass: {
+                    popup: 'animate__animated animate__fadeInUp animate__faster'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutDown animate__faster'
+                },
+                customClass: {
+                    popup: 'custom-popup',
+                    title: 'custom-title',
+                    confirmButton: 'custom-confirm-button'
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const style = document.createElement('style');
+            style.innerHTML = `
+            .custom-popup {
+                border-radius: 15px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+                border: none; 
+            }
+            .custom-title {
+                font-size: 1.5em;
+                color: #333333; 
+            }
+            .custom-confirm-button {
+                border-radius: 5px;
+                padding: 10px 20px;
+                font-size: 1em;
+                border: none;
+            }
+        `;
+            document.head.appendChild(style);
+        });
+    </script>
+
+</body>
+
+</html>

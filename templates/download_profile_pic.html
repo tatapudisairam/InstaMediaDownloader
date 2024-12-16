@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/a75a4a90c1.js" crossorigin="anonymous"></script>
+    
+    <link rel="shortcut icon" href="{{ url_for('static', filename='Images/idm_logo.png') }}" type="image/x-icon">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        *,
+        ::before,
+        ::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            box-sizing: border-box;
+            justify-content: center;
+            margin: 3rem 0 0 0;
+            font-family: 'Poppins', sans-serif;
+            font-size: .938rem;
+            background: rgb(31 41 55 / 1);
+            color: white;
+            line-height: 1.6;
+        }
+
+        body {
+            position: relative;
+            box-sizing: border-box;
+            justify-content: center;
+            background-color: rgb(31 41 55);
+            margin: 0;
+            overflow-y: auto;
+        }
+
+        h1 {
+            margin: 0 auto;
+            top: 200px;
+            text-align: center;
+            font-family: sans-serif;
+            font-size: 90px;
+            position: relative;
+            color: white;
+        }
+
+        body::before,
+        body::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.5;
+            animation: move 10s infinite;
+        }
+
+
+        body::before {
+            width: 400px;
+            height: 400px;
+            background-color: rgb(138, 28, 138);
+            top: 10px;
+            left: 100px;
+            animation: one 10s infinite;
+        }
+
+        body::after {
+            width: 400px;
+            height: 400px;
+            background-color: rgb(51, 111, 195);
+            top: 10px;
+            right: 100px;
+            animation: two 10s infinite;
+        }
+
+        @media (max-width:370px) {
+            body::before {
+                top: 0;
+                left: 0;
+            }
+
+            body::after {
+                top: 0;
+                right: 0;
+            }
+        }
+
+        @keyframes one {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            25% {
+                transform: translate(-100px, 70px);
+            }
+
+            50% {
+                transform: translate(20px, 150px);
+            }
+
+            75% {
+                transform: translate(50px, 100px);
+            }
+
+            100% {
+                transform: translate(0, 0);
+            }
+        }
+
+        @keyframes two {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            25% {
+                transform: translate(50px, 10px);
+            }
+
+            50% {
+                transform: translate(100px, 50px);
+            }
+
+            75% {
+                transform: translate(50px, 100px);
+            }
+
+            100% {
+                transform: translate(0, 0);
+            }
+        }
+
+        @media only screen and (max-width: 370px) {
+            h1 {
+                font-size: 45px;
+            }
+
+            body::before,
+            body::after {
+                width: 130px;
+                height: 130px;
+                filter: blur(50px);
+            }
+        }
+
+
+
+
+        h1,
+        h2,
+        h3,
+        ul,
+        p {
+            margin: 0;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-weight: 600;
+            color: white;
+        }
+
+        ul {
+            padding: 0;
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .section {
+            padding: 4rem 0 2rem;
+        }
+
+        .section-title,
+        .section-title-center {
+            font-size: 1.25rem;
+            color: #161216;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .l-main {
+            overflow: hidden;
+        }
+
+        .bd-container {
+            max-width: 968px;
+            width: calc(100% - 3rem);
+            margin-left: 1.5rem;
+            margin-right: 1.5rem;
+        }
+
+        .bd-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .l-header {
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            background: transparent;
+        }
+
+        .nav {
+            height: 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        @media screen and (max-width: 768px) {
+            .nav__menu {
+                position: fixed;
+                top: -100%;
+                left: 0;
+                right: 0;
+                width: 90%;
+                margin: 0 auto;
+                padding: 2.5rem 0 0;
+                text-align: center;
+                background-color: #FEFBFB;
+                transition: .4s;
+                box-shadow: 0 0 4px rgba(0, 0, 0, .1);
+                border-radius: 2rem;
+                z-index: 100;
+            }
+        }
+
+        .nav__item {
+            margin-bottom: 1.5rem;
+        }
+
+        .nav__link,
+        .nav__logo,
+        .nav__toggle {
+            color: white;
+            font-weight: 600;
+        }
+
+        .nav__logo:hover {
+            color: #DA2534;
+        }
+
+        .nav__link {
+            transition: .3s;
+        }
+
+        .nav__link:hover {
+            color: #DA2534;
+        }
+
+        .nav__toggle {
+            font-size: 1.3rem;
+            cursor: pointer;
+        }
+
+
+
+
+        .show-menu {
+            top: 4rem;
+        }
+
+        .active-link {
+            position: relative;
+        }
+
+        .active-link::before {
+            content: '';
+            position: absolute;
+            bottom: -.75rem;
+            left: 45%;
+            width: 5px;
+            height: 5px;
+            background-color: white;
+            border-radius: 50%;
+        }
+
+        .home__container {
+            row-gap: .5rem;
+        }
+
+        .footer__container {
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        }
+
+        .footer__logo {
+            color: #161216;
+        }
+
+        .footer__title {
+            margin-bottom: 1rem;
+        }
+
+        .footer__logo,
+        .footer__title {
+            font-size: 1.125rem;
+        }
+
+        .footer__link {
+            display: inline-block;
+            margin-bottom: .75rem;
+            color: rgb(211, 194, 194);
+        }
+
+        .footer__link:hover {
+            color: #DA2534;
+        }
+
+        .footer__social {
+            font-size: 1.5rem;
+            color: white;
+            margin-right: 1.5rem;
+        }
+
+        .footer__social:hover {
+            color: #DA2534;
+        }
+
+        .footer__copy {
+            text-align: center;
+            font-size: .813rem;
+            color: white;
+            margin-top: 4rem;
+        }
+
+
+
+        @media screen and (max-width: 775px) {
+
+            .nav__link,
+            .nav__logo,
+            .nav__toggle {
+                color: black;
+            }
+
+            .active-link::before {
+                background-color: black;
+            }
+        }
+
+        @media screen and (min-width: 576px) {
+
+            .home__container {
+                grid-template-columns: repeat(2, 1fr);
+                align-items: center;
+            }
+
+            .home__container {
+                padding: 5rem 0 0;
+            }
+        }
+
+        @media screen and (min-width: 768px) {
+            body {
+                margin: 0;
+            }
+
+            .section {
+                padding-top: 7rem;
+            }
+
+            .nav {
+                height: 4.5rem;
+            }
+
+            .nav__list {
+                display: flex;
+                align-items: center;
+            }
+
+            .nav__item {
+                margin-left: 2.5rem;
+                margin-bottom: 0;
+            }
+
+            .nav__toggle {
+                display: none;
+            }
+
+            .home__container {
+                padding: 7rem 2rem 0;
+            }
+
+        }
+
+        @media screen and (min-width: 968px) {
+            .bd-container {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .home__container {
+                column-gap: 5rem;
+            }
+
+
+            .footer__logo,
+            .footer__title {
+                font-size: 1.25rem;
+            }
+
+            body {
+                font-size: 1rem;
+            }
+
+            .footer__copy {
+                font-size: 0.875rem;
+            }
+        }
+
+        .toggle-rotate {
+            transition: transform 0.5s;
+        }
+
+        .rotate {
+            transform: rotate(180deg);
+        }
+
+
+
+        @keyframes border-bottom-left-animation {
+            0% {
+                border-bottom-color: #e81cff;
+                border-left-color: #e81cff;
+            }
+
+            50% {
+                border-bottom-color: #40c9ff;
+                border-left-color: #40c9ff;
+            }
+
+            100% {
+                border-bottom-color: #e81cff;
+                border-left-color: #e81cff;
+            }
+        }
+
+        .form-container {
+            margin-top: 30px;
+            width: 800px;
+            border-bottom: 2px solid #e81cff;
+            border-left: 2px solid #e81cff;
+            padding: 32px 24px;
+            font-size: 14px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            box-sizing: border-box;
+            border-radius: 16px;
+            position: relative;
+            animation: border-bottom-left-animation 3s infinite;
+            z-index: 10;
+        }
+
+        .form-container button:active {
+            scale: 0.95;
+        }
+
+        .form-container .form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-container .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .form-container .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #717171;
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        .form-container .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 8px;
+            color: #fff;
+            font-family: inherit;
+            background-color: transparent;
+            border: 1px solid #414141;
+        }
+
+        .form-container .form-group input:focus {
+            outline: none;
+            border-color: #e81cff;
+        }
+
+        .form-container .form-submit-btn {
+            display: flex;
+            justify-content: center;
+            font-family: inherit;
+            color: #717171;
+            font-weight: 600;
+            width: 40%;
+            background: #313131;
+            border: 1px solid #414141;
+            padding: 12px 16px;
+            cursor: pointer;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .form-container .form-submit-btn:hover {
+            background-color: #fff;
+            border-color: #fff;
+            color: #313131;
+        }
+
+        footer {
+            position: relative;
+            z-index: 10;
+        }
+
+
+
+
+
+        @media (max-width: 768px) {
+            .form-container {
+                width: 540px;
+                padding: 24px 16px;
+            }
+
+            .form-container .form-group input,
+            .form-container .form-submit-btn {
+                padding: 10px 14px;
+            }
+
+            .form-container .form-group label {
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .form-container {
+                width: 350px;
+                padding: 20px 12px;
+            }
+
+            .form-container .form-group input {
+                padding: 8px 12px;
+            }
+
+            .form-container .form-submit-btn {
+                padding: 10px;
+                max-width: 100px;
+                font-size: 12px;
+            }
+
+            .form-container .form-group label {
+                font-size: 10px;
+            }
+        }
+
+
+        @media (max-width: 400px) {
+            .form-container {
+                width: 330px;
+            }
+        }
+
+        @media (max-width: 370px) {
+            .form-container {
+                width: 300px;
+            }
+        }
+
+
+
+        @media (max-width: 768px) {
+            .form-container {
+                width: 450px;
+                padding: 24px 16px;
+            }
+
+            .content-container{
+                max-width: 450px;
+            }
+
+            .form-container .form-group input,
+            .form-container .form-submit-btn {
+                padding: 10px 14px;
+            }
+
+            .form-container .form-group label {
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .form-container {
+                width: 350px;
+                padding: 20px 12px;
+            }
+
+            .content-container{
+                max-width: 350px;
+            }
+
+            .form-container .form-group input {
+                padding: 8px 12px;
+            }
+
+            .form-container .form-submit-btn {
+                padding: 10px;
+                max-width: 100px;
+                font-size: 12px;
+            }
+
+            .form-container .form-group label {
+                font-size: 10px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .form-container {
+                width: 330px;
+            }
+        }
+
+        @media (max-width: 370px) {
+            .form-container {
+                width: 300px;
+            }
+        }
+
+
+        .form-container .form-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: nowrap;
+            align-items: center;
+        }
+
+        .form-container .form-group i {
+            font-size: 2rem;
+            color: #fff;
+        }
+
+        .iconnnn {
+            display: none;
+        }
+
+        @media (max-width: 770px) {
+            .iconnnn {
+                display: block;
+            }
+        }
+
+        .main_icon {
+            display: flex;
+            gap: 1rem;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            align-items: center;
+        }
+
+        .main_icon i {
+            color: #fff;
+        }
+
+        .iconnnn {
+            margin-top: 30px;
+        }
+
+
+        .content-container {
+            width: 100%;
+            max-width: 800px;
+            background: linear-gradient(#212121, #212121) padding-box,
+                linear-gradient(145deg, transparent 35%, #e81cff, #40c9ff) border-box;
+            border: 2px solid transparent;
+            padding: 32px 24px;
+            font-size: 14px;
+            font-family: inherit;
+            color: white;
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            box-sizing: border-box;
+            border-radius: 16px;
+            align-items: center;
+        }
+
+        .left-side {
+            width: 30%;
+        }
+
+        .image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+
+        .right-side {
+            width: 70%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .right-side h2 {
+            color: #fff;
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .right-side p {
+            color: #ccc;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .content-container {
+                gap: 10px;
+                padding: 24px;
+            }
+
+            .left-side,
+            .right-side {
+                width: 50%;
+            }
+
+            .right-side h2 {
+                font-size: 16px;
+            }
+
+            .right-side p {
+                font-size: 13px;
+            }
+
+            .image {
+                border-radius: 6px;
+            }
+        }
+
+
+
+        @media (max-width: 480px) {
+            .content-container {
+                gap: 8px;
+                padding: 8px;
+                flex-direction: row;
+            }
+
+            .left-side,
+            .right-side {
+                width: 50%;
+            }
+
+
+            .right-side h2 {
+                font-size: 14px;
+            }
+
+            .right-side p {
+                font-size: 13px;
+            }
+
+            .image {
+                border-radius: 4px;
+            }
+        }
+
+        .content-container1 {
+            width: 100%;
+            max-width: 800px;
+            background: linear-gradient(#212121, #212121) padding-box,
+                linear-gradient(145deg, transparent 35%, #e81cff, #40c9ff) border-box;
+            border: 2px solid transparent;
+            padding: 32px 24px;
+            font-size: 14px;
+            font-family: inherit;
+            color: white;
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            box-sizing: border-box;
+            border-radius: 16px;
+            align-items: center;
+        }
+
+        .left-side1 {
+            width: 70%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .right-side1 {
+            width: 30%;
+        }
+
+        .image1 {
+            width: 100%;
+            border-radius: 8px;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .left-side1 h2 {
+            color: #fff;
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .left-side1 p {
+            color: #ccc;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .content-container1 {
+                gap: 10px;
+                padding: 24px;
+                flex-direction: row;
+            }
+
+            .left-side1,
+            .right-side1 {
+                width: 50%;
+            }
+
+            .left-side1 h2 {
+                font-size: 16px;
+            }
+
+            .left-side1 p {
+                font-size: 13px;
+            }
+
+            .image1 {
+                border-radius: 6px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .content-container1 {
+                gap: 8px;
+                padding: 8px;
+                flex-direction: row;
+            }
+
+            .left-side1,
+            .right-side1 {
+                width: 50%;
+            }
+
+            .left-side1 h2 {
+                font-size: 14px;
+            }
+
+            .left-side1 p {
+                font-size: 12px;
+            }
+
+            .image1 {
+                border-radius: 4px;
+            }
+        }
+
+        @media(min-width:880px) {
+            .steps {
+                padding-top: 2rem;
+            }
+        }
+
+
+        @keyframes loader_5191 {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.square {
+    background: #ddd;
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -5px;
+    margin-left: -5px;
+}
+
+#sq1 { margin-top: -25px; margin-left: -25px; animation: loader_5191 675ms ease-in-out 0s infinite alternate; }
+#sq2 { margin-top: -25px; animation: loader_5191 675ms ease-in-out 75ms infinite alternate; }
+#sq3 { margin-top: -25px; margin-left: 15px; animation: loader_5191 675ms ease-in-out 150ms infinite; }
+#sq4 { margin-left: -25px; animation: loader_5191 675ms ease-in-out 225ms infinite; }
+#sq5 { animation: loader_5191 675ms ease-in-out 300ms infinite; }
+#sq6 { margin-left: 15px; animation: loader_5191 675ms ease-in-out 375ms infinite; }
+#sq7 { margin-top: 15px; margin-left: -25px; animation: loader_5191 675ms ease-in-out 450ms infinite; }
+#sq8 { margin-top: 15px; animation: loader_5191 675ms ease-in-out 525ms infinite; }
+#sq9 { margin-top: 15px; margin-left: 15px; animation: loader_5191 675ms ease-in-out 600ms infinite; }
+
+.loader {
+    display: none;
+    position: fixed; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    z-index: 9999; 
+}
+
+input::placeholder{
+    color: #b7b7b7;
+}
+
+    </style>
+    <title>Download HD Profile Pictures from Any Account</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+
+
+
+    <header class="l-header" id="header">
+        <nav class="nav bd-container">
+            <a href="#" class="nav__logo" style="color: white;">IMD</a>
+
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="/" class="nav__link">Reel</a></li>
+                    <li class="nav__item"><a href="/download_image" class="nav__link">Image</a></li>
+                    <li class="nav__item"><a href="/download_profile_pic" class="nav__link active-link">Profile Pic</a>
+                    </li>
+                    <li class="nav__item"><a href="/contact" class="nav__link">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="nav__toggle" id="nav-toggle" style="color: white;">
+                <i class="fa-solid fa-angles-down"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main class="l-main">
+
+        <section class="home iconnnn" id="home">
+            <div class="home__container bd-container bd-grid">
+                <div class="form-container">
+                    <form id="image_download_form" action="/download_image" method="POST">
+                        <div class="form-group">
+                            <ul class="main_icon">
+                                <li><a href="/"><i class="fa-solid fa-video"></i></a></li> ||
+                                <li><a href="/download_image"><i class="fa-solid fa-image"></i></a></li> ||
+                                <li><a href="/download_profile_pic"><i class="fa-solid fa-user"></i></a></li> ||
+                                <li><a href="/contact"><i class="fa-solid fa-address-book"></i></a></li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+
+        <div class="loader" id="loader">
+            <div class="square" id="sq1"></div>
+            <div class="square" id="sq2"></div>
+            <div class="square" id="sq3"></div>
+            <div class="square" id="sq4"></div>
+            <div class="square" id="sq5"></div>
+            <div class="square" id="sq6"></div>
+            <div class="square" id="sq7"></div>
+            <div class="square" id="sq8"></div>
+            <div class="square" id="sq9"></div>
+        </div>
+
+        <section class="home" id="home">
+            <div class="home__container bd-container bd-grid">
+                <div class="form-container">
+                    <form class="form" action="/download_profile_pic" method="POST" id="profile-pic-form">
+                        <div class="form-group">
+                            <label for="username" style="color: #b7b7b7;">Enter Instagram Username:</label>
+                            <input type="text" id="username" name="username" required placeholder="Enter the Username">
+                        </div>
+                        <button class="form-submit-btn" type="submit">Download Profile Pic</button>
+                    </form>
+                </div>
+
+            </div>
+        </section>
+
+
+
+
+
+
+
+        <section class="home" style="margin-top: 40px;">
+            <div class="home__container bd-container bd-grid"
+                style="grid-template-columns: repeat(1, 1fr); align-items: center;">
+                <div class="content-container">
+                    <div class="left-side">
+                        <img src="{{ url_for('static', filename='Images/profile_pic_1.jpg') }}" alt="Left Image"
+                            class="image">
+                    </div>
+                    <div class="right-side">
+                        <h2>Step 1</h2>
+                        <p>Navigate to Instagram, choose the account whose profile picture you want to download, and
+                            note the username usually displayed at the top of the profile.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="home" style="margin-top: 15px;"></section>
+        <div class="home__container bd-container bd-grid steps"
+            style="grid-template-columns: repeat(1, 1fr); align-items: center;">
+            <div class="content-container1">
+                <div class="left-side1">
+                    <h2>Step 2</h2>
+                    <p>Return to this page and type the correct username you noted into the designated input field.</p>
+                </div>
+                <div class="right-side1">
+                    <img src="{{ url_for('static', filename='Images/profile_pic_2.jpg') }}" alt="Left Image"
+                        class="image">
+                </div>
+            </div>
+        </div>
+        </section>
+
+        <section class="home" style="margin-top: 15px;"></section>
+        <div class="home__container bd-container bd-grid steps"
+            style="grid-template-columns: repeat(1, 1fr); align-items: center;">
+            <div class="content-container">
+                <div class="left-side">
+                    <img src="{{ url_for('static', filename='Images/profile_pic_3.jpg') }}" alt="Left Image"
+                        class="image">
+                </div>
+                <div class="right-side">
+                    <h2>Step 3</h2>
+                    <p>Click on the "Download Profile Pic" button to get the high-definition profile picture of the
+                        account.</p>
+                </div>
+            </div>
+        </div>
+        </section>
+
+    </main>
+
+    <footer class="footer section">
+        <div class="footer__container bd-container bd-grid">
+            <div class="footer__content">
+                <h3 class="footer__title">Quick Links</h3>
+                <ul>
+                    <li><a href="/" class="footer__link">Reel </a></li>
+                    <li><a href="/download_image" class="footer__link">Image</a></li>
+                    <li><a href="/download_profile_pic" class="footer__link">Profile Pic </a></li>
+                    <li><a href="/contact" class="footer__link">Contact </a></li>
+                </ul>
+            </div>
+
+
+            <div class="footer__content">
+                <h3 class="footer__title">Reach Out to Me!</h3>
+                <ul>
+                    <li>
+                        <a href="mailto:tatapudisairam5@gmail.com" class="footer__link">
+                            <i class="fa-solid fa-envelope"></i> Email: tatapudisairam5@gmail.com
+                        </a>
+                    </li>
+                    <li>
+                        <a href="tel:+917609826595" class="footer__link">
+                            <i class="fa-solid fa-phone"></i> Phone: +91 7609826595
+                        </a>
+                    </li>
+
+                    <br>
+                    <li>
+                        <a href="https://www.facebook.com/tatapudi.sairam.16?mibextid=ZbWKwL" class="footer__social" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/tatapudi_sairam/" class="footer__social" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/sairam-tatapudi-887b4924b/" class="footer__social" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <p class="footer__copy" style="font-weight: bold; color: #fff;">&#169; 2023-2024. All right reserved</p>
+    </footer>
+
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#profile-pic-form').on('submit', function(event) {
+                
+                event.preventDefault(); 
+                $('#loader').show(); 
+                
+                var formData = $(this).serialize(); 
+                
+                $.ajax({
+                    url: '/download_profile_pic',
+                    method: 'POST',
+                    data: formData,
+                    xhrFields: {
+                        responseType: 'blob'
+                    },
+                    success: function(response, status, xhr) {
+                        var filename = xhr.getResponseHeader('Content-Disposition').split('filename=')[1].replace(/"/g, '');
+                        var url = window.URL.createObjectURL(response);
+                        var link = document.createElement('a');
+                        link.href = url;
+                        link.setAttribute('download', filename);
+                        document.body.appendChild(link);
+                        link.click();
+                        link.remove();
+                        $('#loader').hide(); 
+                    },
+                    error: function() {
+                        $('#loader').hide(); 
+                        alert('Failed to download the profile picture. Please try again.');
+                    }
+                });
+            });
+        });
+    </script>
+    
+
+    <script>
+        const showMenu = (toggleId, navId) => {
+            const toggle = document.getElementById(toggleId),
+                nav = document.getElementById(navId)
+
+            if (toggle && nav) {
+                toggle.addEventListener('click', () => {
+                    nav.classList.toggle('show-menu')
+                    toggle.classList.toggle('rotate')
+                })
+            }
+        }
+        showMenu('nav-toggle', 'nav-menu')
+
+        const navLink = document.querySelectorAll('.nav__link')
+
+        function linkAction() {
+            const navMenu = document.getElementById('nav-menu')
+            navMenu.classList.remove('show-menu')
+            document.getElementById('nav-toggle').classList.remove('rotate')
+        }
+        navLink.forEach(n => n.addEventListener('click', linkAction))
+
+
+        const s = ScrollReveal({
+            distance: '30px',
+            duration: 1800,
+            reset: true,
+        });
+
+        s.reveal(`
+           .footer__content`, {
+            origin: 'top',
+            interval: 200,
+        })
+
+
+    </script>
+</body>
+
+</html>
